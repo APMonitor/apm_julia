@@ -1,5 +1,5 @@
 # retrieve apm.jl from GitHub or APMonitor.com
-include("apm.jl")
+include("../apm.jl")
 
 s = "http://byu.apmonitor.com"
 a = "minlp"

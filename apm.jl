@@ -143,7 +143,7 @@ function apm_option(server,app,name,value)
   app      = application name \n \
   name     = {FV,MV,SV,CV}.option \n \
   value    = numeric value of option =#
-  aline = "option %s = %f" %(name,value)
+  aline = @sprintf("option %s = %f",name,value)
   app = lowercase(app)
   app = replace(app," ","")
   response = apm(server,app,aline)
@@ -279,7 +279,7 @@ function apm_solve(app,imode)
   app_data =  app * ".csv"
 
   # randomize the application name
-  app = app * "_" * abs(rand(Int32))
+  app = app * "_" * string(abs(rand(Int32)))
 
   # clear previous application
   apm(server,app,"clear all")
@@ -288,7 +288,7 @@ function apm_solve(app,imode)
     # load model file
     apm_load(server,app,app_model)
   catch error
-    println("Model file " * app * ".apm does not exist")
+    println("Model file " * app_model * " does not exist")
     return []
   end
 
@@ -298,12 +298,12 @@ function apm_solve(app,imode)
     csv_load(server,app,app_data)
   catch error
     # data file is optional
-    println("Optional data file " * app * ".csv does not exist")
+    println("Optional data file " * app_data * " does not exist")
   end
 
   # default options
   # use or don't use web viewer
-  web = False
+  web = false
   if web
     apm_option(server,app,"nlc.web",2)
   else
