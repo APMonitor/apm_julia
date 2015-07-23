@@ -1,0 +1,18 @@
+Model hs44
+  Variables
+    x[1:4] = 0, >=0
+  End Variables
+
+  Equations
+    x[1] + 2*x[2] <= 8
+    4*x[1] + x[2] <= 12
+    3*x[1] + 4*x[2] <= 12
+    2*x[3] + x[4] <= 8
+    x[3] + 2*x[4] <= 8
+    x[3] + x[4] <= 5     
+
+    ! best known objective = -15
+    minimize x[1] - x[2] - x[3] - x[1]*x[3] + x[1]*x[4] + x[2]*x[3] - x[2]*x[4]
+  End Equations
+End Model
+

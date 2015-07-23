@@ -1,0 +1,16 @@
+Model hs35
+  Variables
+    x[1] = 0.5, >=0
+    x[2] = 0.5, >=0
+    x[3] = 0.5, >=0
+  End Variables
+
+  Equations
+    x[1] + x[2] + 2*x[3] <= 3
+
+    ! best known objective = 1/9
+    minimize 9 - 8*x[1] - 6*x[2] - 4*x[3] + 2*x[1]^2 + 2*x[2]^2 + x[3]^2 + 2*x[1]*x[2] + 2*x[1]*x[3]
+  End Equations
+End Model
+
+

@@ -1,0 +1,18 @@
+Model hs66 
+  Variables
+    x[1] = 0
+    x[2] = 1.05
+    x[3] = 2.9
+  End Variables
+
+  Equations
+    x[2] - exp(x[1]) >= 0
+    x[3] - exp(x[2]) >= 0
+    0 <= x[1] <= 100
+    0 <= x[2] <= 100
+    0 <= x[3] <=  10   
+
+    ! best known objective = 0.5181632741
+    minimize 0.2*x[3] - 0.8*x[1]
+  End Equations
+End Model

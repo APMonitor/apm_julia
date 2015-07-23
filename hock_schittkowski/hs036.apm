@@ -1,0 +1,15 @@
+Model hs36
+  Variables
+    x[1:3] = 10, >=0
+  End Variables
+
+  Equations
+    x[1] + 2*x[2] + 2*x[3] <= 72
+    x[1] <= 20
+    x[2] <= 11
+    x[3] <= 42                  
+
+    ! best known objective = -3300
+    minimize -x[1]*x[2]*x[3]
+  End Equations
+End Model

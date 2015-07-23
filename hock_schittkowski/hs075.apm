@@ -1,0 +1,29 @@
+Model hs75
+  Parameters
+    a = 0.48
+
+    l[1] = 0
+    l[2] = 0
+    l[3] = -a
+    l[4] = -a
+
+    u[1] = 1200
+    u[2] = 1200
+    u[3] = a
+    u[4] = a
+  End Parameters
+
+  Variables
+    x[1:4] = 0, >=l[1:4], <=u[1:4]
+  End Variables
+
+  Equations
+    -a <= x[4] - x[3] <= a
+    x[1] = 1000*sin(-x[3] - 0.25) + 1000*sin(-x[4] - 0.25) + 894.8
+    x[2] = 1000*sin(x[3] - 0.25) + 1000*sin(x[3]-x[4] - 0.25) + 894.8
+    1000*sin(x[4] - 0.25) + 1000*sin(x[4] - x[3] - 0.25) + 1294.8 = 0
+
+    ! best known objective = 5174.4129
+    minimize 3*x[1] + 1.0e-6*x[1]^3 + 2*x[2] + 2.0e-6*x[2]^3/3
+  End Equations
+End Model

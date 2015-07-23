@@ -1,0 +1,19 @@
+Model hs43
+  Variables
+    x[1:4] = 0
+  End Variables
+
+  Equations
+    x[1]^2 +x[2]^2 +x[3]^2 +x[4]^2 +x[1] -x[2] +x[3] -x[4] <= 8
+    x[1]^2 +2*x[2]^2 +x[3]^2 +2*x[4]^2 -x[1] -x[4] <= 10
+    2*x[1]^2 +x[2]^2 +x[3]^2 +2*x[1] -x[2] -x[4] <= 5          
+
+    ! best known objective = -44
+    ! best known solution
+    ! x[1] = 0
+    ! x[2] = 1
+    ! x[3] = 2
+    ! x[4] = -1
+    minimize x[1]^2 + x[2]^2 + 2*x[3]^2 + x[4]^2 - 5*x[1] - 5*x[2] - 21*x[3] + 7*x[4]
+  End Equations
+End Model

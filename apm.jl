@@ -298,7 +298,8 @@ function apm_solve(app,imode)
     csv_load(server,app,app_data)
   catch error
     # data file is optional
-    println("Optional data file " * app_data * " does not exist")
+    pass
+	#println("Optional data file " * app_data * " does not exist")
   end
 
   # default options

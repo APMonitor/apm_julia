@@ -1,0 +1,18 @@
+Model hs34
+  Variables
+    x[1] = 0, >=0
+    x[2] = 1.05, >=0
+    x[3] = 2.9, >=0
+  End Variables
+
+  Equations
+    x[2] >= exp(x[1])
+    x[3] >= exp(x[2])
+    x[1] <= 100
+    x[2] <= 100
+    x[3] <= 10     
+
+    ! best known objective = -log(log(10))
+    minimize -x[1]
+  End Equations
+End Model

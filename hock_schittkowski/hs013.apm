@@ -1,0 +1,16 @@
+Model hs13
+  Variables
+    x[1] = -2, >=0
+    x[2] = -2, >=0
+  End Variables
+
+  Equations
+    (1-x[1])^3 >= x[2]
+
+    ! best known objective = 1
+    ! best known solution
+    ! x[1] = 1
+    ! x[2] = 0
+    minimize (x[1] - 2)^2 + x[2]^2
+  End Equations
+End Model

@@ -1,0 +1,14 @@
+Model hs18
+  Variables
+    x[1] = 2, >=2, <=50
+    x[2] = 2, >=0, <=50
+  End Variables
+
+  Equations
+    x[1]*x[2] >= 25
+    x[1]^2 + x[2]^2 >= 25
+
+    ! best known objective = 5
+    minimize x[1]^2/100 + x[2]^2
+  End Equations
+End Model

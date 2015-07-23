@@ -1,0 +1,15 @@
+Model hs21
+  Variables
+    x[1] = -1
+    x[2] = 1
+  End Variables
+
+  Equations
+    10*x[1] - x[2] >= 10
+    2 <= x[1] <= 50
+    -50 <= x[2] <= 50    
+
+    ! best known objective = -99.96
+    minimize x[1]^2/100 + x[2]^2 - 100
+  End Equations
+End Model

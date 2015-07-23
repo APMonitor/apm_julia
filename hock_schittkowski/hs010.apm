@@ -1,0 +1,13 @@
+Model hs10
+  Variables
+    x[1] = -10
+    x[2] = 10
+  End Variables
+
+  Equations
+    -3*x[1]^2 + 2*x[1]*x[2] - x[2]^2 >= -1
+
+    ! best known objective = -1.0
+    minimize x[1] - x[2]
+  End Equations
+End Model

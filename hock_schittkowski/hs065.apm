@@ -1,0 +1,14 @@
+Model hs65 
+  Variables
+    x[1] = -5, >= -4.5, <=4.5
+    x[2] =  5, >= -4.5, <=4.5
+    x[3] =  0, >= -5  , <=5
+  End Variables
+
+  Equations
+    x[1]^2 + x[2]^2 + x[3]^2 <= 48
+
+    ! best known objective = 0.9535288567
+    minimize (x[1] - x[2])^2 + (x[1] + x[2] - 10)^2/9 + (x[3] - 5)^2
+  End Equations
+End Model

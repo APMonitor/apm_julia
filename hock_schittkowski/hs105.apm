@@ -1,0 +1,76 @@
+# Maximum likelihood estimation
+
+# Ref.: W. Hock and K. Schittkowski, Test Examples for Nonlinear Programming
+# Codes.  Lecture Notes in Economics and Mathematical Systems, v. 187,
+# Springer-Verlag, New York, 1981, p. 114.
+
+# Number of variables:   8
+# Number of constraints: 17
+Model hs105 
+  Parameters
+    PI = 4*atan(1)
+
+    y[1:1] = 95
+    y[2:2] = 105
+    y[3:6] = 110
+    y[7:10] = 115
+    y[11:25] = 120
+    y[26:40] = 125
+    y[41:55] = 130
+    y[56:68] = 135
+    y[69:89] = 140
+    y[90:101] = 145
+    y[102:118] = 150
+    y[119:122] = 155
+    y[123:142] = 160
+    y[143:150] = 165
+    y[151:167] = 170
+    y[168:175] = 175
+    y[176:181] = 180
+    y[182:187] = 185
+    y[188:194] = 190
+    y[195:198] = 195
+    y[199:201] = 200
+    y[202:204] = 205
+    y[205:212] = 210
+    y[213:213] = 215
+    y[214:219] = 220
+    y[220:224] = 230
+    y[225:225] = 235
+    y[226:232] = 240
+    y[233:233] = 245
+    y[234:235] = 250
+  End Parameters
+
+  Variables
+    x[1] = .1
+    x[2] = .2
+    x[3] = 100
+    x[4] = 125
+    x[5] = 175
+    x[6] = 11.2
+    x[7] = 13.2
+    x[8] = 15.8
+  End Variables
+
+  Intermediates
+    a[1:235] = x[1] / x[6] * exp(-(y[1:235] - x[3])^2 / (2 * x[6]^2))
+    b[1:235] = x[2] / x[7] * exp(-(y[1:235] - x[4])^2 / (2 * x[7]^2))
+    c[1:235] = (1 - x[2] - x[1]) / x[8] * exp(-(y[1:235] - x[5])^2 / (2 * x[8]^2))
+  End Intermediates
+
+  Equations
+    1 - x[1] - x[2] >= 0
+    .001 <= x[1] <= .499
+    .001 <= x[2] <= .449
+    100 <= x[3] <= 180
+    130 <= x[4] <= 210
+    170 <= x[5] <= 240
+    5 <= x[6] <= 25
+    5 <= x[7] <= 25
+    5 <= x[8] <= 25      
+
+    ! best known objective = 1136.36
+    minimize - (log((a[1:235] + b[1:235] + c[1:235]) / sqrt(2 * PI)))
+  End Equations
+End Model

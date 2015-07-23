@@ -1,0 +1,23 @@
+Model hs48
+  Variables
+    x[1] = 3
+    x[2] = 5
+    x[3] = -3
+    x[4] = 2
+    x[5] = -2
+  End Variables
+
+  Intermediates
+    ! p[5] = sum(x[1:5])
+    p[1] = x[1]
+    p[2:5] = p[1:4] + x[2:5]
+  End Intermediates
+
+  Equations
+    p[5] = 5
+    x[3] - 2*(x[4]+x[5]) = -3
+
+    ! best known objective = 0
+    minimize (x[1]-1)^2 + (x[2]-x[3])^2 + (x[4]-x[5])^2
+  End Equations
+End Model

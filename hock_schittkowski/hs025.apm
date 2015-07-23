@@ -1,0 +1,22 @@
+Model hs25
+  Variables
+    x[1] = 100
+    x[2] = 12.5
+    x[3] = 3
+  End Variables
+
+  Intermediates
+    s[1] = 1
+    s[2:99] = s[1:98] + 1
+    u[1:99] = 25 + (-50*log(s[1:99]/100))^(2/3)
+  End Intermediates
+
+  Equations
+    1/10 <= x[1] <= 100
+    0 <= x[2] <= 25.6
+    0 <= x[3] <= 5
+
+    ! best known objective = 0
+    minimize (-s[1:99]/100 + exp(-(u[1:99] - x[2])^x[3]/x[1]))^2
+  End Equations
+End Model

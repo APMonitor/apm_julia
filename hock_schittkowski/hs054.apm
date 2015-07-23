@@ -1,0 +1,53 @@
+Model hs54 
+  Parameters
+    l[1] = 0
+    l[2] = -10
+    l[3] = 0
+    l[4] = 0
+    l[5] = -1
+    l[6] = 0
+
+    u[1] = 2e4
+    u[2] = 10
+    u[3] = 1e7
+    u[4] = 20
+    u[5] = 1
+    u[6] = 2e8
+
+    mu[1] = 10000
+    mu[2] = 1
+    mu[3] = 2e6
+    mu[4] = 10
+    mu[5] = 0.001
+    mu[6] = 1e8
+
+    sigma[1] = 8000
+    sigma[2] = 1
+    sigma[3] = 7e6
+    sigma[4] = 50
+    sigma[5] = 0.05
+    sigma[6] = 5e8
+
+    rho = 0.2
+
+    yi[1] = 6.0e+3
+    yi[2] = 1.5   
+    yi[3] = 4.0e+6
+    yi[4] = 2     
+    yi[5] = 3.0e-3
+    yi[6] = 5.0e+7
+  End Parameters
+
+
+  Variables
+    y[1:6] = (yi[1:6] - mu[1:6])/sigma[1:6], >= (l[1:6] - mu[1:6])/sigma[1:6], <= (u[1:6]-mu[1:6])/sigma[1:6]
+  End Variables
+
+  Equations
+    y[1]/sigma[2] + 4000*y[2]/sigma[1] = 2000/sigma[1] + 0.2/sigma[2]
+
+    ! best known objective = 27/140 = 0.1929
+    minimize ( y[1]^2 + 2*rho*y[1]*y[2] + y[2]^2 ) / (1-rho^2) + (y[3]^2 + y[4]^2 + y[5]^2 + y[6]^2)
+  End Equations
+End Model
+

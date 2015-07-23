@@ -1,0 +1,16 @@
+Model hs08
+  Variables
+    x[1] = 2
+    x[2] = 1
+  End Variables
+
+  Equations
+    x[1]^2 + x[2]^2 = 25
+    x[1]*x[2] = 9
+
+    ! best known objective =-1
+    ! x[1]=4.60159
+    ! x[2]=1.95584
+    minimize -1
+  End Equations
+End Model

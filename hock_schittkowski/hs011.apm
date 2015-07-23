@@ -1,0 +1,13 @@
+Model hs11
+  Variables
+    x[1] = 4.9
+    x[2] = 0.1
+  End Variables
+
+  Equations
+    x[1]^2 <= x[2]
+
+    ! best known objective = -8.498464223
+    minimize (x[1] - 5)^2 + x[2]^2 -25
+  End Equations
+End Model

@@ -1,0 +1,11 @@
+Model hs05
+  Variables
+    x[1] = 0, >= -1.5, <= 4
+    x[2] = 0, >= -3, <=3
+  End Variables
+
+  Equations
+    ! best known objective = -(sqrt(3)/2 + 3.14159/3) = -1.91322207
+    minimize sin(x[1]+x[2]) + (x[1]-x[2])^2 - 1.5*x[1] + 2.5*x[2] + 1
+  End Equations
+End Model

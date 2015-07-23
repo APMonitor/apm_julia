@@ -1,0 +1,74 @@
+# Alkylation process
+
+# Ref.: W. Hock and K. Schittkowski, Test Examples for Nonlinear Programming
+# Codes.  Lecture Notes in Economics and Mathematical Systems, v. 187,
+# Springer-Verlag, New York, 1981, p. 123.
+Model hs114 
+  Parameters
+    a = .99
+    b = .9
+
+    x0[1] =  1745
+    x0[2] =  12000
+    x0[3] =  110
+    x0[4] =  3048
+    x0[5] =  1974
+    x0[6] =  89.2
+    x0[7] =  92.8
+    x0[8] =  8
+    x0[9] =  3.6
+    x0[10] = 145   
+
+    lb[1] =  .00001
+    lb[2] =  .00001
+    lb[3] =  .00001
+    lb[4] =  .00001
+    lb[5] =  .00001
+    lb[6] =  85    
+    lb[7] =  90    
+    lb[8] =  3     
+    lb[9] =  1.2   
+    lb[10] = 145   
+
+    ub[1] =  2000   
+    ub[2] =  16000  
+    ub[3] =  120    
+    ub[4] =  5000   
+    ub[5] =  2000   
+    ub[6] =  93     
+    ub[7] =  95     
+    ub[8] =  12     
+    ub[9] =  4      
+    ub[10] = 162    
+  End Parameters
+
+  Variables
+    x[1:10] >= lb[1:10], <= ub[1:10], = x0[1:10]
+  End Variables
+
+  Intermediates
+    G1 = 35.82 - .222*x[10] - b*x[9]
+    G2 = -133 + 3*x[7] - a*x[10]
+    G5 = 1.12*x[1] + .13167*x[1]*x[8] - .00667*x[1]*x[8]^2 - a*x[4]
+    G6 = 57.425 + 1.098*x[8] - .038*x[8]^2 + .325*x[6] - a*x[7]
+  End Intermediates
+
+  Equations
+    G1 >= 0
+    G2 >= 0
+    -G1 + x[9]*(1/b - b) >= 0
+    -G2 + (1/a - a)*x[10] >= 0
+    G5 >= 0
+    G6 >= 0
+    -G5 + (1/a - a)*x[4] >= 0
+    -G6 + (1/a - a)*x[7] >= 0
+    1.22*x[4] - x[1] - x[5] = 0
+    98000*x[3]/(x[4]*x[9] + 1000*x[3]) - x[6] = 0
+    (x[2] + x[5])/x[1] - x[8] = 0
+
+    ! best known objective = -1768.80696
+    minimize 5.04*x[1] + .035*x[2] + 10*x[3] + 3.36*x[5] - .063*x[4]*x[7]
+  End Equations
+End Model
+
+

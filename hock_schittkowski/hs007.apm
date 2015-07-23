@@ -1,0 +1,14 @@
+Model hs07
+  Variables
+    x[1] = 2
+    x[2] = 2
+  End Variables
+
+  Equations
+    (1+x[1]^2)^2 + x[2]^2 = 4
+
+    ! best known objective = -sqrt(3)
+    minimize log(1+x[1]^2) - x[2]
+  End Equations
+End Model
+

@@ -1,0 +1,15 @@
+Model hs14
+  Variables
+    x[1] = 2, >=0
+    x[2] = 2, >=0
+  End Variables
+
+  Equations
+    x[1]^2/4 + x[2]^2 <= 1
+    x[1] - 2*x[2] = -1
+
+    ! best known objective = 9 - 2.875*sqrt(7)
+    minimize (x[1] - 2)^2 + (x[2]-1)^2
+  End Equations
+End Model
+

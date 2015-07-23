@@ -1,0 +1,27 @@
+Model hs55 
+  Parameters
+    u[1] = 1
+    u[2:3] = 1e20
+    u[4] = 1
+    u[5:6] = 1e20
+  End Parameters
+
+  Variables
+    x[1] = 1, >=0, <=u[1]
+    x[2] = 2, >=0, <=u[2]
+    x[3:5] = 0, >=0, <=u[3:5]
+    x[6] = 2, >=0, <=u[6]
+  End Variables
+
+  Equations
+    x[1] + 2*x[2] + 5*x[5] = 6
+    x[1] + x[2] + x[3] = 3
+    x[4] + x[5] + x[6] = 2
+    x[1] + x[4] = 1
+    x[2] + x[5] = 2
+    x[3] + x[6] = 2          
+
+    ! best known objective = 19/3
+    minimize x[1] + 2*x[2] + 4*x[5] + exp(x[1]*x[4])
+  End Equations
+End Model

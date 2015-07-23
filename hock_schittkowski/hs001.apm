@@ -1,0 +1,11 @@
+Model hs01
+  Variables
+    x[1] = -2
+    x[2] = 1
+  End Variables
+
+  Equations
+    ! best known objective = 0
+    minimize 100*(x[2] - x[1]^2)^2 + (1-x[1])^2
+  End Equations
+End Model

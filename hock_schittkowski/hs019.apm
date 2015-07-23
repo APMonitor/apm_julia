@@ -1,0 +1,16 @@
+Model hs19
+  Variables
+    x[1] = 20.1
+    x[2] = 5.84
+  End Variables
+
+  Equations
+    (x[1] - 5)^2 + (x[2] - 5)^2 >= 100
+    (x[2] - 5)^2 + (x[1] - 6)^2 <= 82.81
+    13 <= x[1] <= 100
+    0 <= x[2] <= 100
+
+    ! best known objective = -6961.81381
+    minimize (x[1] - 10)^3 + (x[2] - 20)^3
+  End Equations
+End Model

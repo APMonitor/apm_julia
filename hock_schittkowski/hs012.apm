@@ -1,0 +1,17 @@
+Model hs12
+  Variables
+    x[1] = 0
+    x[2] = 0
+  End Variables
+
+  Equations
+    4*x[1]^2 + x[2]^2 <= 25
+
+    ! best known objective = -30
+    ! best known solution
+    ! x[1] = 2
+    ! x[1] = 3
+    ! note: solver may find local minimum at x[1]=0,x[2]=0
+    minimize (x[1]^2)/2 + x[2]^2 - x[1]*x[2] - 7*x[1] - 7*x[2]
+  End Equations
+End Model

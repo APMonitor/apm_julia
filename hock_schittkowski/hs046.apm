@@ -1,0 +1,17 @@
+Model hs46
+  Variables
+    x[1] = sqrt(2)/2
+    x[2] = 1.75
+    x[3] = 0.5
+    x[4] = 2
+    x[5] = 2
+  End Variables
+
+  Equations
+    x[1]^2*x[4] + sin(x[4] - x[5]) = 1
+    x[2] + x[3]^4*x[4]^2 = 2
+
+    ! best known objective = 0
+    minimize (x[1]-x[2])^2 + (x[3]-1)^2 + (x[4]-1)^4 + (x[5]-1)^6
+  End Equations
+End Model

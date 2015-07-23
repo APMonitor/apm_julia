@@ -1,0 +1,28 @@
+Model hs93 
+  Variables
+    x[1] = 5.54
+    x[2] = 4.4
+    x[3] = 12.02
+    x[4] = 11.82
+    x[5] = 0.702
+    x[6] = 0.852
+  End Variables
+
+  Intermediates
+    prod[0] = 1
+    prod[1:6] = x[1:6] * prod[0:5]
+  End Intermediates
+
+  Equations
+    0.001 * prod[6] >= 2.07
+
+    0.00062*x[1]*x[4]*x[5]^2*(x[1] + x[2] + x[3]) + &
+    0.00058*x[2]*x[3]*x[6]^2*(x[1] + 1.57*x[2] + x[4]) <= 1
+
+    ! best known objective = 135.075961
+    minimize 0.0204*x[1]*x[4]*(x[1] + x[2] + x[3]) + &
+          0.0187*x[2]*x[3]*(x[1] + 1.57*x[2] + x[4]) + &
+          0.0607*x[1]*x[4]*x[5]^2*(x[1] + x[2] + x[3]) + &
+          0.0437*x[2]*x[3]*x[6]^2*(x[1] + 1.57*x[2] + x[4])
+  End Equations
+End Model

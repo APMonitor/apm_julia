@@ -1,0 +1,55 @@
+! Nonlinear electrical network
+! The problem is corrected to conform to the problem as stated in
+!	D. M. Himmelblau, Applied Nonlinear Programming,
+!	McGraw-Hill, 1972, pp. 413-414
+! except that jump-discontinuities in the objective function are
+! omitted by stating it as the sum of two piecewise-linear terms
+Model hs87 
+  Parameters
+    a = 131.078
+    b = 1.48477	 ! Hock & Schittkowski say 1.48577
+    c = 0.90798
+    d0 = 1.47588
+    e0 = 1.47588
+    d = cos(d0)
+    e = sin(e0)
+
+    lim[1] = 300
+    lim[2] = 100
+    lim[3] = 200
+
+    rate[1] = 30
+    rate[2] = 31
+    rate[3] = 28
+    rate[4] = 29
+    rate[5] = 30
+  End Parameters
+
+  Variables
+    add[1:3] > 0
+    slk[1:3]
+
+    x[1] = 390,     >= 0,     <= 400
+    x[2] = 1000,    >= 0,     <= 1000
+    x[3] = 419.5,   >= 340,   <= 420
+    x[4] = 340.5,   >= 340,   <= 420
+    x[5] = 198.175, >= -1000, <= 1000  ! Hock & Schittkowski say <= 10000
+    x[6] = 0.5,     >= 0,     <= 0.5236  
+  End Variables
+
+  Equations
+    ! piecewise linear
+    add[1] = x[1] - lim[1] + slk[1]
+    add[2] = x[2] - lim[2] + slk[2]
+    add[3] = x[2] - lim[3] + slk[3]
+
+    x[1] = 300 - x[3]*x[4]*cos(b - x[6])/a + c*x[3]^2*d/a
+    x[2] = -x[3]*x[4]*cos(b + x[6])/a + c*x[4]^2*d/a
+    x[5] = -x[3]*x[4]*sin(b + x[6])/a + c*x[4]^2*e/a
+    200 - x[3]*x[4]*sin(b - x[6])/a + c*x[3]^2*e/a = 0  
+
+    ! best known objective = 8827.5977
+    minimize rate[1]*x[1] + (rate[2]-rate[1])*add[1]
+    minimize rate[3]*x[2] + (rate[4]-rate[3])*add[2] + (rate[5]-rate[4])*add[3]
+  End Equations
+End Model

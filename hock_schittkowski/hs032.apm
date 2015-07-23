@@ -1,0 +1,15 @@
+Model hs32
+  Variables
+    x[1] = 0.1, >=0
+    x[2] = 0.7, >=0
+    x[3] = 0.2, >=0
+  End Variables
+
+  Equations
+    6*x[2] + 4*x[3] - x[1]^3 >= 3
+    x[1] + x[2] + x[3] = 1
+
+    ! best known objective = 1
+    minimize (x[1] + 3*x[2] + x[3])^2 + 4*(x[1] - x[2])^2
+  End Equations
+End Model

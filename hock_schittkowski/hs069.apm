@@ -1,0 +1,35 @@
+Model hs69
+  Parameters
+    a = 0.1
+    b = 1000
+    d = 1
+    n = 24 
+
+    l[1] = 0.0001
+    l[2] = 0
+    l[3] = 0
+    l[4] = 0      
+
+    u[1] = 100
+    u[2] = 100
+    u[3] = 2
+    u[4] = 2
+  End Parameters
+
+  Variables
+    x[1:4] = 1, >=l[1:4], <=u[1:4]
+  End Variables
+
+  Equations
+    x[3] - 2*erf(-x[2]) = 0
+    x[4] = erf(-x[2] + d*sqrt(n)) + erf(-x[2] - d*sqrt(n))
+
+    ! best known objective = -956.71288
+    ! best known solution
+    ! x[1] = 0.02937141
+    ! x[2] = 1.1902534
+    ! x[3] = 0.23394676
+    ! x[4] = 0.7916678
+    minimize ( a*n - (b*(exp(x[1])-1) - x[3])*x[4]/(exp(x[1]) - 1 + x[4]) )/x[1]
+  End Equations
+End Model

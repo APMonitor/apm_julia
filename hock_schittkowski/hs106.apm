@@ -1,0 +1,48 @@
+# Heat exchanger design
+
+# Ref.: W. Hock and K. Schittkowski, Test Examples for Nonlinear Programming
+# Codes.  Lecture Notes in Economics and Mathematical Systems, v. 187,
+# Springer-Verlag, New York, 1981, p. 115.
+
+# Number of variables: 8
+# Number of constraints:  22
+Model hs106 
+  Parameters
+    a = 0.0025,   >0
+    b = 0.01,     >0
+    c = 833.3325, >0
+    d = 100,      >0
+    e = 83333.33, >0
+    f = 1250,     >0
+    g = 1250000,  >0
+    h = 2500,     >0
+  End Parameters
+
+  Variables
+    x[1] = 5000
+    x[2] = 5000
+    x[3] = 5000
+    x[4] = 200
+    x[5] = 350
+    x[6] = 150
+    x[7] = 225
+    x[8] = 425
+
+  End Variables
+
+  Equations
+    1 - a * (x[4] + x[6]) >= 0
+    1 - a * (x[5] + x[7] - x[4]) >= 0
+    1 - b * (x[8] - x[5]) >= 0
+    x[1] * x[6] - c * x[4] - d * x[1] + e >= 0
+    x[2] * x[7] - f * x[5] - x[2] * x[4] + f * x[4] >= 0
+    x[3] * x[8] - g - x[3] * x[5] + h * x[5] >= 0
+
+    100 <= x[1] <= 10000
+    1000 <= x[2:3] <= 10000
+    10 <= x[4:8] <= 1000
+
+    ! best known objective = 7049.330923
+    minimize x[1] + x[2] + x[3]
+  End Equations
+End Model

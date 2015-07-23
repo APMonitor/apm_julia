@@ -1,0 +1,14 @@
+Model hs22
+  Variables
+    x[1] = 2
+    x[2] = 2
+  End Variables
+
+  Equations
+    x[1] + x[2] <= 2
+    -x[1]^2 + x[2] >= 0
+
+    ! best known objective = 1
+    minimize (x[1] - 2)^2 + (x[2] - 1)^2
+  End Equations
+End Model

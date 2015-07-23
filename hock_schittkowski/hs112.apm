@@ -1,0 +1,32 @@
+Model hs112
+  Parameters
+    c[1] =  -6.089
+    c[2] = -17.164
+    c[3] = -34.054
+    c[4] =  -5.914
+    c[5] = -24.721
+    c[6] = -14.986
+    c[7] = -24.100
+    c[8] = -10.708
+    c[9] = -26.662
+    c[10] = -22.179
+  End Parameters
+
+  Variables
+    x[1:10] = 0.1, >= 1.0e-6
+  End Variables
+
+  Intermediates
+    sum[0] = 0
+    sum[1:10] = x[1:10] + sum[0:9]
+  End Intermediates
+
+  Equations
+    x[1] + 2*x[2] + 2*x[3] + x[6] + x[10] = 2
+    x[4] + 2*x[5] + x[6] + x[7] = 1
+    x[3] + x[7] + x[8] + 2*x[9] + x[10] = 1
+
+    ! best known objective = -47.76109026
+    minimize x[1:10] * (c[1:10] + log(x[1:10]/sum[10]))
+  End Equations
+End Model

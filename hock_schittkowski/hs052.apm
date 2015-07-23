@@ -1,0 +1,14 @@
+Model hs52
+  Variables
+    x[1:5] = 2
+  End Variables
+
+  Equations
+    x[1] + 3*x[2] = 0
+    x[3] +   x[4] - 2*x[5] = 0
+    x[2] -   x[5] = 0        
+
+    ! best known objective = 1859/349
+    minimize (4*x[1]-x[2])^2 + (x[2]+x[3]-2)^2 + (x[4]-1)^2 + (x[5]-1)^2
+  End Equations
+End Model

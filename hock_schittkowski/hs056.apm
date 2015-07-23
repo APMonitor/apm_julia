@@ -1,0 +1,26 @@
+Model hs56 
+  Parameters
+    a = asin(sqrt(1/4.2))
+    b = asin(sqrt(5/7.2))
+    c = asin(sqrt(4/7))  
+    d = asin(sqrt(2/7))
+
+    xi[1:3] = 1
+    xi[4:6] = a
+    xi[7] = b
+  End Parameters
+
+  Variables
+    x[1:7] =  xi[1:7], >= 0
+  End Variables
+
+  Equations
+    x[1] - 4.2*sin(x[4])^2 = 0
+    x[2] - 4.2*sin(x[5])^2 = 0
+    x[3] - 4.2*sin(x[6])^2 = 0
+    x[1] + 2*x[2] + 2*x[3] - 7.2*sin(x[7])^2 = 0
+
+    ! best known objective = -3.456
+    minimize -x[1]*x[2]*x[3]
+  End Equations
+End Model

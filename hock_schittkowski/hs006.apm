@@ -1,0 +1,13 @@
+Model hs06
+  Variables
+    x[1] = -1.2
+    x[2] = 1
+  End Variables
+
+  Equations
+    10*(x[2] - x[1]^2) = 0
+
+    ! best known objective = 0
+    minimize (1-x[1])^2
+  End Equations
+End Model

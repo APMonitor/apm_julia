@@ -1,0 +1,15 @@
+Model hs15
+  Variables
+    x[1] = -2
+    x[2] = 1
+  End Variables
+
+  Equations
+    x[1]*x[2] >= 1
+    x[1] + x[2]^2 >= 0
+    x[1] <= 1/2
+
+    ! best known objective = 306.5
+    minimize 100*(x[2] - x[1]^2)^2 + (1 - x[1])^2
+  End Equations
+End Model

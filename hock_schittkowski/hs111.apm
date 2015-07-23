@@ -1,0 +1,32 @@
+Model hs111 
+  Parameters
+    c[1] =   -6.089
+    c[2] =  -17.164
+    c[3] =  -34.054
+    c[4] =   -5.914
+    c[5] =  -24.721
+    c[6] =  -14.986
+    c[7] =  -24.100
+    c[8] =  -10.708
+    c[9] =  -26.662
+    c[10] = -22.179
+  End Parameters
+
+  Variables
+    x[1:10] = -2.3, >= -100, <= 100
+  End Variables
+
+  Intermediates
+    sum[0] = 0
+    sum[1:10] = exp(x[1:10]) + sum[0:9]
+  End Intermediates
+
+  Equations
+    exp(x[1]) + 2*exp(x[2]) + 2*exp(x[3]) + exp(x[6]) + exp(x[10]) = 2
+    exp(x[4]) + 2*exp(x[5]) + exp(x[6]) + exp(x[7]) = 1
+    exp(x[3]) + exp(x[7]) + exp(x[8]) + 2*exp(x[9]) + exp(x[10]) = 1
+
+    ! best known objective = -47.76109026
+    minimize exp(x[1:10])*(c[1:10] + x[1:10] - log(sum[10]))
+  End Equations
+End Model
