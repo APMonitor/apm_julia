@@ -1,0 +1,17 @@
+Parameters
+  K = 30    ! K = constant
+
+Variables
+  y = 2     ! y  = variable
+  dy = -1   ! dy = first derivative (y')
+  t = 0     ! time
+
+Equations
+  $t = 1    ! dt/dt = 1, to get time
+  $y = dy   ! dy/dt = y'
+
+  ! y'' + (0.9 + 0.7*t)*y' + K * y = 0
+  $dy + (0.9+0.7*t)*dy + K*y = 0  ! $dy = y''
+
+  
+

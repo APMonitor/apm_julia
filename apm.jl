@@ -1,7 +1,7 @@
 # install with Pkg.add("HTTPClient")
 using HTTPClient.HTTPC
 # install with Pkg.add("Compat")
-using Compat
+#using Compat
 
 function apm(server,app,aline)
   #=Send a request to the server \n \
@@ -16,8 +16,8 @@ function apm(server,app,aline)
     app = replace(app," ","")
 
     # Send request to web-server
-    params = {"p" => app, "a" => aline}
-    f = HTTPC.get(url_base,RequestOptions(query_params=collect(@compat params)))
+    params = [("p",app), ("a",aline)]
+    f = HTTPC.get(url_base,RequestOptions(query_params=params))
     response = strip(utf8(f.body.data))
   end
   return response
@@ -107,9 +107,9 @@ function apm_sol(server,app)
   sol = readdlm(sol_file,',')
   n,m = size(sol)
   if m == 2
-    y = (String => Float32)[sol[i,1]=>sol[i,2] for i in 1:n]
+    y = (AbstractString => Float32)[sol[i,1]=>sol[i,2] for i in 1:n]
   else
-    y = (String => Array)[sol[i,1]=>sol[i,2:m] for i in 1:n]
+    y = (AbstractString => Array)[sol[i,1]=>sol[i,2:m] for i in 1:n]
   end
   # Return solution
   return y
@@ -143,7 +143,8 @@ function apm_option(server,app,name,value)
   app      = application name \n \
   name     = {FV,MV,SV,CV}.option \n \
   value    = numeric value of option =#
-  aline = @sprintf("option %s = %f",name,value)
+  #aline = "option %s = %f" %(name,value)
+  aline = "option " * name * "= $(value)"
   app = lowercase(app)
   app = replace(app," ","")
   response = apm(server,app,aline)
@@ -221,9 +222,9 @@ function apm_tag(server,app,name)
   url_base = server * "/online/get_tag.php"
   app = lowercase(app)
   app = replace(app," ","")
-  params = {"p" => app, "n" => name}
-  f = HTTPC.get(url_base,RequestOptions(query_params=collect(@compat params)))
-  value = float32(utf8(f.body.data))
+  params = [("p",app), ("n",name)]
+  f = HTTPC.get(url_base,RequestOptions(query_params=params))
+  value = parse(Float32,utf8(f.body.data))
 
   return value
 end
@@ -237,8 +238,8 @@ function apm_meas(server,app,name,value)
   url_base = server * "/online/meas.php"
   app = lowercase(app)
   app = replace(app," ","")
-  params = {"p" => app, "n" => name*".MEAS", "v" => value}
-  f = HTTPC.get(url_base,RequestOptions(query_params=collect(@compat params)))
+  params = [("p",app), ("n",name*".MEAS"), ("v",value)]
+  f = HTTPC.get(url_base,RequestOptions(query_params=params))
   response = strip(utf8(f.body.data))
   return response
 end
@@ -279,7 +280,8 @@ function apm_solve(app,imode)
   app_data =  app * ".csv"
 
   # randomize the application name
-  app = app * "_" * string(abs(rand(Int32)))
+  rn = abs(rand(Int32))
+  app = app * "_$(rn)"
 
   # clear previous application
   apm(server,app,"clear all")
@@ -288,7 +290,7 @@ function apm_solve(app,imode)
     # load model file
     apm_load(server,app,app_model)
   catch error
-    println("Model file " * app_model * " does not exist")
+    println("Model file " * app * ".apm does not exist")
     return []
   end
 
@@ -298,8 +300,7 @@ function apm_solve(app,imode)
     csv_load(server,app,app_data)
   catch error
     # data file is optional
-    pass
-	#println("Optional data file " * app_data * " does not exist")
+    println("Optional data file " * app * ".csv does not exist")
   end
 
   # default options
